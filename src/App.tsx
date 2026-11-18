@@ -236,8 +236,7 @@ export default function App() {
           min-height: 100vh;
           padding: 25px 12px 40px;
           text-align: center;
-          background:
-            radial-gradient(circle at top, #fffde8, #ffe4ae);
+          background: radial-gradient(circle at top, #fffde8, #ffe4ae);
           color: #57351d;
         }
 
@@ -304,8 +303,7 @@ export default function App() {
           border-radius: 28px;
           background: #80c95a;
           border: 8px solid #a66a39;
-          box-shadow: 0 9px 0 #774725,
-                      inset 0 0 20px #4e9d3e;
+          box-shadow: 0 9px 0 #774725, inset 0 0 20px #4e9d3e;
           display: grid;
           grid-template-columns: repeat(3, 1fr);
           gap: 12px;
@@ -315,8 +313,7 @@ export default function App() {
           aspect-ratio: 1;
           border-radius: 50%;
           background: #633c25;
-          box-shadow: inset 0 9px 10px #392115,
-                      0 4px 0 #b7e27d;
+          box-shadow: inset 0 9px 10px #392115, 0 4px 0 #b7e27d;
           position: relative;
           overflow: hidden;
           display: flex;
@@ -349,7 +346,6 @@ export default function App() {
           }
         }
 
-        .normal { filter: none; }
         .gold {
           filter: drop-shadow(0 0 8px gold);
         }
@@ -491,7 +487,11 @@ export default function App() {
           cursor: playing ? "not-allowed" : "pointer",
         }}
       >
-        {playing ? "ゲーム中..." : finished ? "もう一度遊ぶ！" : "ゲームスタート！"}
+        {playing
+          ? "ゲーム中..."
+          : finished
+          ? "もう一度遊ぶ！"
+          : "ゲームスタート！"}
       </button>
 
       {finished && (
