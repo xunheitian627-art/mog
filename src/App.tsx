@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 
 type MoleType = "normal" | "gold" | "bomb";
 
@@ -22,7 +22,6 @@ export default function App() {
   const [playing, setPlaying] = useState(false);
   const [finished, setFinished] = useState(false);
   const [message, setMessage] = useState("ゲームスタート！");
-  const [hitId, setHitId] = useState<number | null>(null);
 
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const spawnRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -69,22 +68,8 @@ export default function App() {
       oscillator.start();
       oscillator.stop(ctx.currentTime + duration);
     } catch {
-      // 音声が利用できない環境ではゲームを続行
+      // 音声が利用できない場合もゲームを続行
     }
-  }
-
-  function stopGame() {
-    if (timerRef.current) clearInterval(timerRef.current);
-    if (spawnRef.current) clearInterval(spawnRef.current);
-
-    timerRef.current = null;
-    spawnRef.current = null;
-
-    setPlaying(false);
-    setFinished(true);
-    setMoles(initialMoles);
-    setMessage("ゲーム終了！");
-    sound(400, 0.3);
   }
 
   function startGame() {
@@ -98,7 +83,6 @@ export default function App() {
     setFinished(false);
     setPlaying(true);
     setMessage("もぐらをたたこう！");
-    setHitId(null);
     nextId.current = 0;
 
     sound(660);
@@ -178,8 +162,6 @@ export default function App() {
       next[index] = null;
       return next;
     });
-
-    setHitId(mole.id);
 
     if (mole.type === "bomb") {
       setScore((prev) => Math.max(0, prev - 20));
@@ -467,11 +449,7 @@ export default function App() {
                     : "normal"
                 }`}
               >
-                {mole.type === "gold"
-                  ? "🐹"
-                  : mole.type === "bomb"
-                  ? "💣"
-                  : "🐹"}
+                {mole.type === "bomb" ? "💣" : "🐹"}
               </span>
             )}
           </button>
